@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String userName = '';
+  @override
+  void initState() {
+    super.initState();
+    getName();
+  }
+
+  Future<void> getName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? name = prefs.getString("userName");
+    setState(() {
+      userName = name ?? "Guest";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +38,40 @@ class Home extends StatelessWidget {
                 child: IntrinsicHeight(
                   child: Column(
                     children: [
-                      SizedBox(height: 200, child: Text('Hello')),
+                      SizedBox(
+                        height: 200,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Text(
+                                'Hello',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Text(
+                                "$userName",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       SizedBox(height: 20),
                       Expanded(
                         child: Container(

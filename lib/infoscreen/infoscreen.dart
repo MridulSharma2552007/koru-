@@ -16,6 +16,7 @@ class _InfoscreenState extends State<Infoscreen> {
   Future<void> credentialsSaver() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("userName", name);
+    prefs.setBool('settedName', true);
   }
 
   void homepageredirector() {

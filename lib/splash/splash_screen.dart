@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koru/boringGate/gate.dart';
 import 'package:koru/pageview/page_viewpage.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => PageViewpage()),
+        MaterialPageRoute(builder: (context) => Gate()),
       );
     });
   }

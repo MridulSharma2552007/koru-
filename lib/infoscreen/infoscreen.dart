@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koru/Colors/app_colors.dart';
+import 'package:koru/appscreens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Infoscreen extends StatefulWidget {
@@ -15,6 +16,16 @@ class _InfoscreenState extends State<Infoscreen> {
   Future<void> credentialsSaver() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("userName", name);
+  }
+
+  void homepageredirector() {
+    Future.delayed(Duration(seconds: 1), () {
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
+    });
   }
 
   @override
@@ -99,6 +110,8 @@ class _InfoscreenState extends State<Infoscreen> {
                                   name = _textEditingController.text;
                                 });
                                 credentialsSaver();
+                                homepageredirector();
+                                print("your name is $name");
                               },
                             ),
                           ),

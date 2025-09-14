@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koru/Colors/app_colors.dart';
 import 'package:koru/appscreens/home.dart';
+import 'package:koru/infoscreen/infoscreen.dart';
 
 class PageThree extends StatefulWidget {
   final PageController controller;
@@ -96,7 +97,7 @@ class _PageThreeState extends State<PageThree> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Home(),
+                                builder: (context) => const Infoscreen(),
                               ),
                             );
                           });

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:koru/Colors/app_colors.dart';
-import 'package:koru/appscreens/home.dart';
 import 'package:koru/infoscreen/infoscreen.dart';
 
 class PageThree extends StatefulWidget {

@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:koru/Colors/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Infoscreen extends StatelessWidget {
+class Infoscreen extends StatefulWidget {
   const Infoscreen({super.key});
+
+  @override
+  State<Infoscreen> createState() => _InfoscreenState();
+}
+
+class _InfoscreenState extends State<Infoscreen> {
+  final TextEditingController _textEditingController = TextEditingController();
+  String name = '';
+  Future<void> credentialsSaver() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("userName", name);
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +32,7 @@ class Infoscreen extends StatelessWidget {
           builder: (context, constraints) {
             return SingleChildScrollView(
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight, // 👈 ensures full height
-                ),
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Column(
                     children: [
@@ -61,7 +78,6 @@ class Infoscreen extends StatelessWidget {
                         ),
                       ),
 
-                      // Bottom section (fills remaining height)
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
@@ -74,9 +90,16 @@ class Infoscreen extends StatelessWidget {
                               vertical: 50,
                             ),
                             child: TextField(
+                              controller: _textEditingController,
                               decoration: InputDecoration(
                                 hintText: "Enter your name",
                               ),
+                              onSubmitted: (value) {
+                                setState(() {
+                                  name = _textEditingController.text;
+                                });
+                                credentialsSaver();
+                              },
                             ),
                           ),
                         ),

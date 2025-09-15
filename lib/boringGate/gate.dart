@@ -17,6 +17,7 @@ bool settedName = false;
 class _GateState extends State<Gate> {
   Future<void> checkbypass() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    
   }
 
   @override

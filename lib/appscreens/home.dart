@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 200,
+                        height: 100,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                                 horizontal: 20,
                               ),
                               child: Text(
-                                "$userName",
+                                userName,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 26,
@@ -76,7 +76,14 @@ class _HomeState extends State<Home> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.blueAccent,
+                                const Color.fromARGB(255, 15, 15, 16),
+                              ],
+                              begin: Alignment.topCenter,
+                              end: AlignmentGeometry.bottomCenter,
+                            ),
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),

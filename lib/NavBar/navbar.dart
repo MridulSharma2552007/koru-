@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:koru/Colors/app_colors.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -9,15 +7,35 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
           height: 80,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            border: Border(top: BorderSide(color: Colors.white.withAlpha(3))),
-
+            color: Colors.white.withOpacity(0.2),
+            border: Border(
+              top: BorderSide(color: Colors.white.withAlpha(100)),
+              bottom: BorderSide(color: Colors.black.withAlpha(100)),
+            ),
             borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.home_rounded, color: Colors.white),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.search_rounded, color: Colors.white),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.person_rounded, color: Colors.white),
+              ),
+            ],
           ),
         ),
       ),

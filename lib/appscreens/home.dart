@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
                         children: [
                           topwidget(userName: userName),
                           SizedBox(height: 20),
-                          Expanded(child: homescreenconatiner()),
+                          Flexible(child: homescreenconatiner()),
                         ],
                       ),
                     ),

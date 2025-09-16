@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koru/Colors/app_colors.dart';
-import 'package:koru/appscreens/home.dart';
+import 'package:koru/appscreens/root.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Infoscreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _InfoscreenState extends State<Infoscreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Home()),
+        MaterialPageRoute(builder: (context) => const Root()),
       );
     });
   }

@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:koru/appscreens/home.dart';
+import 'package:koru/appscreens/root.dart';
 import 'package:koru/pageview/page_viewpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +16,10 @@ bool settedName = false;
 class _GateState extends State<Gate> {
   Future<void> checkbypass() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    
+    final storedvalue = prefs.getBool('settedName') ?? false;
+    setState(() {
+      settedName = storedvalue;
+    });
   }
 
   @override
@@ -27,6 +30,6 @@ class _GateState extends State<Gate> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: settedName ? Home() : PageViewpage());
+    return Scaffold(body: settedName ? Root() : PageViewpage());
   }
 }

@@ -29,29 +29,25 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(
-        top: true,
-        bottom: false,
-        child: LayoutBuilder(
-          builder: (context, Constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: Constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: Column(
-                    children: [
-                      topwidget(userName: userName),
-                      SizedBox(height: 20),
-                      Expanded(child: homescreenconatiner()),
-                    ],
-                  ),
+      body: LayoutBuilder(
+        builder: (context, Constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: Constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    SizedBox(height: 20,),
+                    topwidget(userName: userName),
+                    SizedBox(height: 20),
+                    Expanded(child: homescreenconatiner()),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
-      bottomNavigationBar: Navbar(),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:koru/NavBar/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
@@ -30,6 +29,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: LayoutBuilder(
+        // ignore: non_constant_identifier_names
         builder: (context, Constraints) {
           return SingleChildScrollView(
             child: ConstrainedBox(
@@ -37,8 +37,8 @@ class _HomeState extends State<Home> {
               child: IntrinsicHeight(
                 child: Column(
                   children: [
-                    SizedBox(height: 20,),
-                    topwidget(userName: userName),
+                    SizedBox(height: 20),
+                    topWidget(userName: userName),
                     SizedBox(height: 20),
                     Expanded(child: homescreenconatiner()),
                   ],
@@ -73,8 +73,8 @@ class homescreenconatiner extends StatelessWidget {
   }
 }
 
-class topwidget extends StatelessWidget {
-  const topwidget({super.key, required this.userName});
+class topWidget extends StatelessWidget {
+  const topWidget({super.key, required this.userName});
 
   final String userName;
 

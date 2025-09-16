@@ -14,11 +14,7 @@ class Navbar extends StatefulWidget {
 class _NavbarState extends State<Navbar> {
   int _currentIndex = 0; // default index
 
-  final List<Widget> _screens = [
-    Home(),
-    Flashcards(),
-    Stats(),
-  ];
+  final List<Widget> _screens = [Home(), Flashcards(), Stats()];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +28,7 @@ class _NavbarState extends State<Navbar> {
           });
         },
         backgroundColor: Colors.blueAccent,
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha: 0.2),
         animationDuration: const Duration(milliseconds: 300),
         items: const [
           Icon(Icons.home),

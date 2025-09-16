@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:koru/appscreens/home.dart';
 import 'package:koru/appscreens/root.dart';
 import 'package:koru/pageview/page_viewpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -112,7 +112,6 @@ class _InfoscreenState extends State<Infoscreen> {
                                 });
                                 credentialsSaver();
                                 homepageredirector();
-                                print("your name is $name");
                               },
                             ),
                           ),

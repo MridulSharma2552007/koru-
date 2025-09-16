@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:koru/boringGate/gate.dart';
-import 'package:koru/pageview/page_viewpage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

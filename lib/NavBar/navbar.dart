@@ -1,44 +1,28 @@
-import 'dart:ui';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-class Navbar extends StatelessWidget {
+class Navbar extends StatefulWidget {
   const Navbar({super.key});
 
   @override
+  State<Navbar> createState() => _NavbarState();
+}
+
+class _NavbarState extends State<Navbar> {
+  @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-        child: Container(
-          height: 80,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
-            border: Border(
-              top: BorderSide(color: Colors.white.withAlpha(100)),
-              bottom: BorderSide(color: Colors.black.withAlpha(100)),
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.home_rounded, color: Colors.white),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.search_rounded, color: Colors.white),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.person_rounded, color: Colors.white),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return CurvedNavigationBar(
+      onTap: (index) {},
+      backgroundColor: Colors.blueAccent,
+
+      color: Colors.white.withOpacity(0.2),
+      animationDuration: Duration(milliseconds: 300),
+
+      items: [
+        Icon(Icons.home),
+        Icon(Icons.crop_landscape_rounded),
+        Icon(Icons.bar_chart_rounded),
+      ],
     );
   }
 }

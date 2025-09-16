@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:koru/NavBar/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,35 +29,29 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          SafeArea(
-            top: true,
-            bottom: false,
-            child: LayoutBuilder(
-              builder: (context, Constraints) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: Constraints.maxHeight,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Column(
-                        children: [
-                          topwidget(userName: userName),
-                          SizedBox(height: 20),
-                          Flexible(child: homescreenconatiner()),
-                        ],
-                      ),
-                    ),
+      body: SafeArea(
+        top: true,
+        bottom: false,
+        child: LayoutBuilder(
+          builder: (context, Constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: Constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(
+                    children: [
+                      topwidget(userName: userName),
+                      SizedBox(height: 20),
+                      Expanded(child: homescreenconatiner()),
+                    ],
                   ),
-                );
-              },
-            ),
-          ),
-          Positioned(bottom: 10, left: 10, right: 10, child: Navbar()),
-        ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
+      bottomNavigationBar: Navbar(),
     );
   }
 }
@@ -75,7 +68,10 @@ class homescreenconatiner extends StatelessWidget {
           begin: Alignment.topCenter,
           end: AlignmentGeometry.bottomCenter,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
     );
   }

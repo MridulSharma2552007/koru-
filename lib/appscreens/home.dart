@@ -70,17 +70,7 @@ class homescreenconatiner extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      child: Column(
-        children: [
-          ContanersWithobjective(),
-          ContanersWithobjective(),
-          ContanersWithobjective(),
-          ContanersWithobjective(),
-          ContanersWithobjective(),
-          ContanersWithobjective(),
-          ContanersWithobjective(),
-        ],
-      ),
+      child: Column(children: [ContanersWithobjective()]),
     );
   }
 }

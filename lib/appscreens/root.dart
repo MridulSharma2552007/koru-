@@ -14,7 +14,10 @@ class _RootState extends State<Root> {
     return SafeArea(
       bottom: false,
       top: false,
-      child: Scaffold(bottomNavigationBar: Navbar()),
+      child: Scaffold(
+        backgroundColor: Colors.blueAccent,
+        bottomNavigationBar: Navbar(),
+      ),
     );
   }
 }

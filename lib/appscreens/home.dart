@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koru/widgets/contaners_withobjective.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
@@ -68,6 +69,17 @@ class homescreenconatiner extends StatelessWidget {
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
+      ),
+      child: Column(
+        children: [
+          ContanersWithobjective(),
+          ContanersWithobjective(),
+          ContanersWithobjective(),
+          ContanersWithobjective(),
+          ContanersWithobjective(),
+          ContanersWithobjective(),
+          ContanersWithobjective(),
+        ],
       ),
     );
   }

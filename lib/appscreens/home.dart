@@ -49,6 +49,14 @@ class _HomeState extends State<Home> {
           );
         },
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(12),
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.white.withValues(alpha: 0.4),
+          child: Icon(Icons.add, color: Colors.black),
+        ),
+      ),
     );
   }
 }

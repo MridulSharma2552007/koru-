@@ -34,7 +34,7 @@ class ContanersWithobjective extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Icon(Icons.add_circle_rounded, size: 60, color: Colors.white),
+                  Icon(Icons.add_circle_rounded, size: 60, color: Colors.pink),
                   SizedBox(height: 12),
                   Text(
                     "Add Objective",

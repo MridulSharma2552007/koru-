@@ -52,7 +52,46 @@ class _HomeState extends State<Home> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(12),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(20),
+              ),
+              context: context,
+              builder: (context) {
+                return FractionallySizedBox(
+                  heightFactor: 0.6,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                        begin: AlignmentGeometry.topCenter,
+                        end: AlignmentGeometry.bottomCenter,
+                        colors: [Colors.black, Colors.blueAccent],
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Add Study Plan'),
+                          SizedBox(height: 20),
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: "Subject",
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
           backgroundColor: Colors.white.withValues(alpha: 0.4),
           child: Icon(Icons.add, color: Colors.black),
         ),
@@ -78,7 +117,7 @@ class homescreenconatiner extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      child: Column(children: [ContanersWithobjective()]),
+      child: Column(children: [Container()]),
     );
   }
 }

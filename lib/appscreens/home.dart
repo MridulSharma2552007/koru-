@@ -56,18 +56,20 @@ class _HomeState extends State<Home> {
             showModalBottomSheet(
               isScrollControlled: true,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(20),
+                borderRadius: BorderRadius.circular(20),
               ),
               context: context,
               builder: (context) {
+                TimeOfDay? selectedTime;
+
                 return FractionallySizedBox(
                   heightFactor: 0.6,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        begin: AlignmentGeometry.topCenter,
-                        end: AlignmentGeometry.bottomCenter,
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                         colors: [Colors.black, Colors.blueAccent],
                       ),
                     ),
@@ -76,13 +78,83 @@ class _HomeState extends State<Home> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Add Study Plan'),
-                          SizedBox(height: 20),
+                          Text(
+                            'Add Study Plan',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          // Subject field
                           TextField(
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.2,
+                            ),
                             decoration: InputDecoration(
                               labelText: "Subject",
-                              border: OutlineInputBorder(),
+                              labelStyle: const TextStyle(
+                                color: Colors.white70,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Colors.blueAccent,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Colors.purple,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
+                          ),
+
+                          const SizedBox(height: 20),
+
+                          // Time picker button
+                          StatefulBuilder(
+                            builder: (context, setModalState) {
+                              return ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blueAccent
+                                      .withOpacity(0.7),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  final time = await showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.now(),
+                                  );
+
+                                  if (time != null) {
+                                    setModalState(() {
+                                      selectedTime = time;
+                                    });
+                                  }
+                                },
+                                icon: const Icon(
+                                  Icons.access_time,
+                                  color: Colors.white,
+                                ),
+                                label: Text(
+                                  selectedTime == null
+                                      ? "Select Time"
+                                      : "Time: ${selectedTime!.format(context)}",
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

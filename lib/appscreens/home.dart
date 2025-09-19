@@ -25,8 +25,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  TextEditingController _controllerSubjectname = TextEditingController();
-  TextEditingController _controllerSelectedtime = TextEditingController();
+  TextEditingController controllerSubjectname = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +116,7 @@ class _HomeState extends State<Home> {
 
                   // Subject TextField
                   TextField(
+                    controller: controllerSubjectname,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,

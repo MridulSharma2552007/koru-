@@ -25,6 +25,9 @@ class _HomeState extends State<Home> {
     });
   }
 
+  TextEditingController _controllerSubjectname = TextEditingController();
+  TextEditingController _controllerSelectedtime = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

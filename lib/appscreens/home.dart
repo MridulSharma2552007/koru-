@@ -209,8 +209,8 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       onPressed: () async {
-                        await DBHelper.insertSubject("Math", "2hours");
-                        Navigator.pop(context); // Close modal
+                        // await DBHelper.insertSubject("Math", "2hours");
+                        // Navigator.pop(context); // Close modal
                       },
                       child: const Text(
                         "Save Plan",

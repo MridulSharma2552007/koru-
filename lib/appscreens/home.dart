@@ -159,38 +159,7 @@ class _HomeState extends State<Home> {
                             });
                           }
                         },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 15,
-                            horizontal: 20,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.blueAccent,
-                              width: 1.5,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.access_time,
-                                color: Colors.white70,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                selectedTime == null
-                                    ? "Select Time"
-                                    : "Time: ${selectedTime!.format(context)}",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        child: timebutton(selectedTime: selectedTime),
                       );
                     },
                   ),
@@ -208,7 +177,23 @@ class _HomeState extends State<Home> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onPressed: () async {},
+                      onPressed: () async {
+                        if (controllerSubjectname.text.isNotEmpty &&
+                            selectedTime != null) {
+                          // Convert TimeOfDay -> String
+                          String formattedTime =
+                              "${selectedTime!.hour.toString().padLeft(2, '0')}:${selectedTime!.minute.toString().padLeft(2, '0')}";
+
+                          await DBHelper.insertSubject(
+                            controllerSubjectname.text,
+                            formattedTime,
+                          );
+
+                          Navigator.pop(context); // close the bottom sheet
+                          setState(() {}); // refresh UI
+                        }
+                      },
+
                       child: const Text(
                         "Save Plan",
                         style: TextStyle(
@@ -229,6 +214,36 @@ class _HomeState extends State<Home> {
   }
 }
 
+class timebutton extends StatelessWidget {
+  const timebutton({super.key, required this.selectedTime});
+
+  final TimeOfDay? selectedTime;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.blueAccent, width: 1.5),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.access_time, color: Colors.white70),
+          const SizedBox(width: 10),
+          Text(
+            selectedTime == null
+                ? "Select Time"
+                : "Time: ${selectedTime!.format(context)}",
+            style: const TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class homescreenconatiner extends StatelessWidget {
   const homescreenconatiner({super.key});
 
@@ -239,9 +254,9 @@ class homescreenconatiner extends StatelessWidget {
         gradient: LinearGradient(
           colors: [const Color.fromARGB(255, 0, 0, 0), Colors.blueAccent],
           begin: Alignment.topCenter,
-          end: AlignmentGeometry.bottomCenter,
+          end: Alignment.bottomCenter,
         ),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
@@ -249,10 +264,70 @@ class homescreenconatiner extends StatelessWidget {
       child: SizedBox(
         height: double.infinity,
         width: double.infinity,
-        child: Column(children: [
-          
-           
-          ],
+        child: FutureBuilder<List<Map<String, dynamic>>>(
+          future: DBHelper.getsubjects(), // fetch subjects
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  "Error: ${snapshot.error}",
+                  style: const TextStyle(color: Colors.red),
+                ),
+              );
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text(
+                  "No study plans yet",
+                  style: TextStyle(color: Colors.white70, fontSize: 18),
+                ),
+              );
+            }
+
+            final subjects = snapshot.data!;
+
+            return ListView.builder(
+              itemCount: subjects.length,
+              itemBuilder: (context, index) {
+                final subject = subjects[index];
+
+                return Card(
+                  color: Colors.white.withOpacity(0.1),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 8,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.book, color: Colors.white),
+                    title: Text(
+                      subject['name'],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      "Time: ${subject['time']}",
+                      style: const TextStyle(color: Colors.white70),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.redAccent),
+                      onPressed: () async {
+                        await DBHelper.deleteSubject(subject['id']);
+                        (context as Element).reassemble(); // refresh widget
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          },
         ),
       ),
     );

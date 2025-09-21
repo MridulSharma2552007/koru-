@@ -20,7 +20,7 @@ class DBHelper {
           CREATE TABLE subjects(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
-            time TEXT
+            time TEXT,
           )
         ''');
       },

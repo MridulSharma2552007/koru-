@@ -208,10 +208,7 @@ class _HomeState extends State<Home> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onPressed: () async {
-                        // await DBHelper.insertSubject("Math", "2hours");
-                        // Navigator.pop(context); // Close modal
-                      },
+                      onPressed: () async {},
                       child: const Text(
                         "Save Plan",
                         style: TextStyle(
@@ -249,32 +246,14 @@ class homescreenconatiner extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      child: Column(
-        children: [
-          FutureBuilder(
-            future: DBHelper.getsubjects(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text(
-                    "No subjects yet",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                );
-              }
-              if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text(
-                    "No subjects yet",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                );
-              }
-              final data = snapshot.data!;
-              return Container();
-            },
-          ),
-        ],
+      child: SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: Column(children: [
+          
+           
+          ],
+        ),
       ),
     );
   }
